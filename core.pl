@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Term::ANSIColor;
-use Text::Table;
+use Text::Table::Tiny 0.04 qw/ generate_table /;
 
 
 my $genes = 4; #Number of genes (Set to (4) to start the loop)
@@ -54,13 +54,20 @@ my @PTG = ();
 if($genes == 1){
   for(my $i=0; $i<$alleles; $i++){
     $POG[$i] = substr($p_one,$i,1);
-    print "$POG[$i]\n";
     $PTG[$i] = substr($p_two,$i,1);
-    print "$PTG[$i]\n";
   }
 
 
-  my $tb = Text::Table->new("$POG[0]", "$POG[1]", "$PTG[0]", "$PTG[1]");
+  my $rows = [
+      #header rows
+      ["GA","$POG[0]", "$POG[1]",],
+      #rows
+      [ "$PTG[0]", $PTG[0].$POG[0], $PTG[0].$POG[1] ],
+      [ "$PTG[1]", $PTG[1].$POG[0], $PTG[1].$POG[1] ],
 
-  print $tb;
+    ];
+
+    print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
+    print "\n";
+
 }
