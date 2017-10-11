@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Term::ANSIColor;
+use Text::Table;
 
 
 my $genes = 4; #Number of genes (Set to (4) to start the loop)
@@ -47,9 +48,19 @@ while($len_two != $alleles){
   $len_two = length($p_two);
 }
 
+my @POG = ();
+my @PTG = ();
+
+if($genes == 1){
+  for(my $i=0; $i<$alleles; $i++){
+    $POG[$i] = substr($p_one,$i,1);
+    print "$POG[$i]\n";
+    $PTG[$i] = substr($p_two,$i,1);
+    print "$PTG[$i]\n";
+  }
 
 
+  my $tb = Text::Table->new("$POG[0]", "$POG[1]", "$PTG[0]", "$PTG[1]");
 
-
-print "parent one $p_one\n";
-print "parent two $p_two\n";
+  print $tb;
+}
