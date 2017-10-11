@@ -14,4 +14,4 @@ Stage 3: Web GUI app for the tool. (using PerlDancer)
 
 
 <br/>
-Note: the CLI uses non-core perl module Text::Table, so make sure to download it first with the command `cpan Text::Table'` if your find it hard due to permessions, open the CPAN shell in with sudo `sudo perl -MCPAN -e shell` then type `install Text::Table`.
+Note: the CLI uses non-core perl module Text::Table, so make sure to download it first with the command 'cpan Text::Table' if your find it hard due to permessions, open the CPAN shell in with sudo 'sudo perl -MCPAN -e shell' then type 'install Text::Table'.
