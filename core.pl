@@ -261,7 +261,7 @@ elsif($genes == 3) {
     ];
 
     print color("GREEN");
-    print "The punett square for this dihybrid cross: \n";
+    print "The punett square for this trihybrid cross: \n";
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
     print "\n";
     print color("RESET");
