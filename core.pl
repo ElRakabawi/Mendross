@@ -5,6 +5,32 @@ use Term::ANSIColor;
 use Text::Table::Tiny 0.04 qw/ generate_table /;
 
 
+#Formatting function for displaying offspring genotype properly
+sub format_swap {
+my ($geno) = @_;
+my $new_geno;
+
+my $len = length($geno);
+
+for(my $i=0; $i<$len; $i+=2){
+  my $chunk = substr($geno, $i, 2);
+  my $first = substr($chunk, 0, 1);
+  my $second = substr($chunk, 1, 1);
+
+  if($second lt $first){
+    my $temp = $second;
+    $second = $first;
+    $first = $temp;
+    $chunk = $first.$second;
+  }
+
+   $new_geno .= $chunk;
+}
+
+return $new_geno;
+}
+
+
 my $genes = 4; #Number of genes (Set to (4) to start the loop)
 my $p_one = ""; #Parent one genotype
 my $len_one = length($p_one); #length of Parent one genotype
@@ -71,6 +97,12 @@ if($genes == 1){
 
     ];
 
+    for(my $y=1; $y<3; $y++){
+      for(my $z=1; $z<3; $z++){
+        $rows->[$y][$z] = format_swap($rows->[$y][$z]);
+      }
+    }
+
     print color("GREEN");
     print "The punett square for this monohybrid cross: \n";
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
@@ -121,6 +153,12 @@ elsif($genes == 2) {
       $PTG[3][0].$POG[2][0].$PTG[3][1].$POG[2][1], $PTG[3][0].$POG[3][0].$PTG[3][1].$POG[3][1] ], #row 4
 
     ];
+
+    for(my $y=1; $y<5; $y++){
+      for(my $z=1; $z<5; $z++){
+        $rows->[$y][$z] = format_swap($rows->[$y][$z]);
+      }
+    }
 
     print color("GREEN");
     print "The punett square for this dihybrid cross: \n";
@@ -259,6 +297,12 @@ elsif($genes == 3) {
       ],
 
     ];
+
+    for(my $y=1; $y<9; $y++){
+      for(my $z=1; $z<9; $z++){
+        $rows->[$y][$z] = format_swap($rows->[$y][$z]);
+      }
+    }
 
     print color("GREEN");
     print "The punett square for this trihybrid cross: \n";
