@@ -2,6 +2,10 @@
 Command line interface mendelian crossing algorithimc tool built with Perl.
 It draws punett sqaure for three types of inheritence patterns: Monohybrid, dihybrid and trihybrid crossing.
 
+<br  >
+![](https://i.imgur.com/sXOdmsa.jpg)
+<br  >
+
 
 
 
