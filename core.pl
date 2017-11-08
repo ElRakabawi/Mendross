@@ -43,7 +43,7 @@ while($genes > 3){
   if($genes > 3){
     print color("RED"), "Genes number must be between 1 and 3\n", color("RESET");
   }
-  print "Enter number of genes:";
+  print "Enter number of genes: ";
    $genes = <STDIN>;
    chomp $genes;
 }
