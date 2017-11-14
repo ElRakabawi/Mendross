@@ -97,17 +97,52 @@ if($genes == 1){
 
     ];
 
+    #Applying format_swap function to the array elements
     for(my $y=1; $y<3; $y++){
       for(my $z=1; $z<3; $z++){
         $rows->[$y][$z] = format_swap($rows->[$y][$z]);
       }
     }
 
+    #Derefrencing the multidimensional array into a one-dimensional array
+    my @arr = ();
+    for my $val (@$rows) {
+      for ( 1 .. $#$val ) {
+        push @arr, $val->[$_];
+      }
+    }
+
+    #Regular expressions to count genotypic ratios
+    my $dom = grep(/([A-Z])([A-Z])/, @arr); #i.e: AA
+    $dom = ($dom/4)*100;                    #to get the percentage
+    my $het = grep(/([A-Z])([a-z])/, @arr); #i.e: Aa
+    $het = ($het/4)*100;
+    my $rec = grep(/([a-z])([a-z])/, @arr); #i.e: aa
+    $rec = ($rec/4)*100;
+
+    #Regular expressions to count phenotypic ratios
+    my $trait_one = grep(/([A-Z])([A-Z])|([A-Z])([a-z])/, @arr); #i.e: AA or Aa
+    $trait_one = ($trait_one/4)*100;                                     #to get the percentage
+    my $trait_two = grep(/([a-z])([a-z])/, @arr);            #i.e: aa
+    $trait_two = ($trait_two/4)*100;
+
+
     print color("GREEN");
     print "The punett square for this monohybrid cross: \n";
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
     print "\n";
     print color("RESET");
+    print "\n";
+    print"Genotype percentage: \n";
+    print color("GREEN");
+    print "Dominant homozygous: $dom%\nHeterozygous: $het%\nRecessive homozygous: $rec%\n";
+    print color("RESET");
+    print"Phenotype percentage: \n";
+    print color("GREEN");
+    print "Trait one: $trait_one%\nTrait two: $trait_two%\n";
+    print color("RESET");
+
+
 
 }
 
