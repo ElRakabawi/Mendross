@@ -134,25 +134,17 @@ if($genes == 1){
     my $het = grep(/([A-Z])([a-z])/, @arr); #i.e: Aa
     my $rec = grep(/([a-z])([a-z])/, @arr); #i.e: aa
 
+    #Percentages of genotypes
+    my $per_dom = ($dom/4)*100;
+    my $per_het = ($het/4)*100;
+    my $per_rec = ($rec/4)*100;
+
     #Regular expressions to count phenotypic ratios
     my $trait_one = grep(/([A-Z])([A-Z])|([A-Z])([a-z])/, @arr); #i.e: AA or Aa
-    $trait_one = ($trait_one/4)*100;                             #to get the percentage
+    my $per_trait_one = ($trait_one/4)*100;                             #to get the percentage
     my $trait_two = grep(/([a-z])([a-z])/, @arr);                #i.e: aa
-    $trait_two = ($trait_two/4)*100;
+    my $per_trait_two = ($trait_two/4)*100;
 
-
-
-    print"Do you want to see the phenotype ratios? (y,n): ";
-    my $choice = <STDIN>;
-    chomp $choice;
-    if($choice eq 'y'){
-      print"Trait one: ";
-      my $trait_one_name= <STDIN>;
-      print"Trait two: ";
-      my $trait_two_name= <STDIN>;
-
-      chomp $trait_one_name;
-      chomp $trait_two_name;
 
       print color("GREEN");
       print "The punett square for this monohybrid cross: \n";
@@ -162,25 +154,12 @@ if($genes == 1){
       print "\n";
       print"Genotype: \n";
       print color("GREEN");
-      print "$dom_holder: $dom\n$het_holder: $het\n$rec_holder: $rec\n";
+      print "$dom_holder: $dom($per_dom)%\n$het_holder: $het($per_het)%\n$rec_holder: $rec($per_rec)%\n";
       print color("RESET");
-      print"Phenotype percentage: \n";
+      print"Phenotype: \n";
       print color("GREEN");
-      print "$trait_one_name: $trait_one%\n$trait_two_name: $trait_two%\n";
+      print "Dominant trait: $trait_one($per_trait_one)%\nRecessive trait: $trait_two($per_trait_two)%\n";
       print color("RESET");
-    }
-    elsif ($choice eq 'n'){
-      print color("GREEN");
-      print "The punett square for this monohybrid cross: \n";
-      print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
-      print "\n";
-      print color("RESET");
-      print "\n";
-      print"Genotype: \n";
-      print color("GREEN");
-      print "$dom_holder: $dom\n$het_holder: $het\n$rec_holder: $rec\n";
-      print color("RESET");
-    }
 
 
 }
@@ -285,7 +264,6 @@ elsif($genes == 2) {
     }
 
     #Regular expressions to count genotypic ratios
-
     #Dom-Dom
     my $gone = grep(/([A-Z])([A-Z])([A-Z])([A-Z])/, @arr); #i.e: XXXX
     my $gtwo = grep(/([A-Z])([a-z])([A-Z])([a-z])/, @arr); #i.e: XxXx
@@ -300,6 +278,17 @@ elsif($genes == 2) {
     #Rec-Rec
     my $geig = grep(/([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: xxxx
 
+    #Percentages of genotypes
+    my $per_gone = ($gone/16)*100;
+    my $per_gtwo = ($gtwo/16)*100;
+    my $per_gthr = ($gthr/16)*100;
+    my $per_gfou = ($gfou/16)*100;
+    my $per_gfiv = ($gfiv/16)*100;
+    my $per_gsix = ($gsix/16)*100;
+    my $per_gsev = ($gsev/16)*100;
+    my $per_geig = ($geig/16)*100;
+    my $per_gnin = ($gnin/16)*100;
+
     #Regular expressions to count phenotypic ratios
     my $dom_dom = grep(/([A-Z])([A-Z])([A-Z])([A-Z])|([A-Z])([a-z])([A-Z])([a-z])|([A-Z])([A-Z])([A-Z])([a-z])|([A-Z])([a-z])([A-Z])([A-Z])/, @arr); #i.e: XXXX or XxXx or XXXx or XxXX
     my $per_one = ($dom_dom/16)*100;                             #to get the percentage
@@ -309,7 +298,7 @@ elsif($genes == 2) {
 
     my $rec_dom = grep(/([a-z])([a-z])([A-Z])([a-z])|([a-z])([a-z])([A-Z])([A-Z])/, @arr);                #i.e: xxXx or xxXX
     my $per_three = ($rec_dom/16)*100;
-    
+
     my $rec_rec = grep(/([a-z])([a-z])([a-z])([a-z])/, @arr);                #i.e: xxxx
     my $per_four = ($rec_rec/16)*100;
 
@@ -320,20 +309,18 @@ elsif($genes == 2) {
     print "\n";
     print color("RESET");
     print "\n";
-    print"Genotype: \n";
-    print color("GREEN");
-    print "
-$one_holder: $gone
-$two_holder: $gtwo
-$thr_holder: $gthr
-$fou_holder: $gfou
-$fiv_holder: $gfiv
-$six_holder: $gsix
-$sev_holder: $gsev
-$eig_holder: $geig
-$nin_holder: $geig\n";
+    print "Genotype: \n";
+    print color("GREEN"), "$one_holder: $gone($per_gone)%
+$two_holder: $gtwo($per_gtwo)%
+$thr_holder: $gthr($per_gthr)%
+$fou_holder: $gfou($per_gfou)%
+$fiv_holder: $gfiv($per_gfiv)%
+$six_holder: $gsix($per_gsix)%
+$sev_holder: $gsev($per_gsev)%
+$eig_holder: $geig($per_geig)%
+$nin_holder: $geig($per_gnin)%\n";
     print color("RESET");
-    print"Phenotype percentage: \n";
+    print"Phenotype:\n";
     print color("GREEN");
     print "dom-dom: $dom_dom($per_one%)\ndom-rec: $dom_rec($per_two%)\nrec-dom: $rec_dom($per_three%)\nrec_rec: $rec_rec($per_four%)\n";
     print color("RESET");
