@@ -463,6 +463,154 @@ elsif($genes == 3) {
       }
     }
 
+    #Derefrencing the multidimensional array into a one-dimensional array
+    my @arr = ();
+    for my $val (@$rows) {
+      for ( 1 .. $#$val ) {
+        push @arr, $val->[$_];
+      }
+    }
+
+    my $arr_len = scalar(@arr);
+    my $one_holder; #1 RRYYCC
+    my $two_holder; #2 RRYYCc
+    my $thr_holder; #3 RRYYcc
+    my $fou_holder; #4 RRYyCC
+    my $fiv_holder; #5 RRYyCc
+    my $six_holder; #6 RRYycc
+    my $sev_holder; #7 RRyyCC
+    my $eig_holder; #8 RRyyCc
+    my $nin_holder; #9 RRyycc
+    my $ten_holder; #10 RrYYCC
+    my $ele_holder; #11 RrYYCc
+    my $twe_holder; #12 RrYYcc
+    my $tht_holder; #13 RrYyCC
+    my $fot_holder; #14 RrYyCc
+    my $fit_holder; #15 RrYycc
+    my $sit_holder; #16 RryyCC
+    my $set_holder; #17 RryyCc
+    my $eit_holder; #18 Rryycc
+    my $nit_holder; #19 rrYYCC
+    my $twt_holder; #20 rrYYCc
+    my $twtone_holder; #21 rrYYcc
+    my $twttwo_holder; #22 rrYyCC
+    my $twtthr_holder; #23 rrYyCc
+    my $twtfou_holder; #24 rrYycc
+    my $twtfiv_holder; #25 rryyCC
+    my $twtsix_holder; #26 rryyCc
+    my $twtsev_holder; #27 rryycc
+
+
+    for(my $i=0; $i<$arr_len; $i++){
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([A-Z])([A-Z])([A-Z])/){  #1 RRYYCC  dom-dom-dom
+        $one_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([A-Z])([A-Z])([a-z])/){  #2 RRYYCc  dom-dom-dom
+        $two_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([A-Z])([a-z])([a-z])/){  #3 RRYYcc  dom-dom-rec
+        $thr_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([a-z])([A-Z])([A-Z])/){  #4 RRYyCC  dom-dom-dom
+        $fou_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([a-z])([A-Z])([a-z])/){  #5 RRYyCc  dom-dom-dom
+        $fiv_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([a-z])([a-z])([a-z])/){  #6 RRYycc  dom-dom-rec
+        $six_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([a-z])([a-z])([A-Z])([A-Z])/){  #7 RRyyCC  dom-rec-dom
+        $sev_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([a-z])([a-z])([A-Z])([a-z])/){  #8 RRyyCc  dom-rec-dom
+        $eig_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([a-z])([a-z])([a-z])([a-z])/){ #9 RRyycc   dom-rec-rec
+        $nin_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([A-Z])([A-Z])([A-Z])/){ #10 RrYYCC  dom-dom-dom
+        $ten_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([A-Z])([A-Z])([a-z])/){ #11 RrYYCc  dom-dom-dom
+        $ele_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([A-Z])([a-z])([a-z])/){ #12 RrYYcc  dom-dom-rec
+        $twe_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([a-z])([A-Z])([A-Z])/){ #13 RrYyCC  dom-dom-dom
+        $tht_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([a-z])([A-Z])([a-z])/){ #14 RrYyCc  dom-dom-dom
+        $fot_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([a-z])([a-z])([a-z])/){ #15 RrYycc  dom-dom-rec
+        $fit_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([a-z])([a-z])([A-Z])([A-Z])/){ #16 RryyCC  dom-rec-dom
+        $sit_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([a-z])([a-z])([A-Z])([a-z])/){ #17 RryyCc  dom-rec-dom
+        $set_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([a-z])([a-z])([a-z])([a-z])/){ #18 Rryycc  dom-rec-rec
+        $eit_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([A-Z])([A-Z])([A-Z])/){ #19 rrYYCC  rec-dom-dom
+        $nit_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([A-Z])([A-Z])([a-z])/){ #20 rrYYCc  rec-dom-dom
+        $twt_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([A-Z])([a-z])([a-z])/){ #21 rrYYcc  rec-dom-rec
+        $twtone_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([a-z])([A-Z])([A-Z])/){ #22 rrYyCC  rec-dom-dom
+        $twttwo_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([a-z])([A-Z])([a-z])/){ #23 rrYyCc  rec-dom-dom
+        $twtthr_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([a-z])([a-z])([a-z])/){ #24 rrYycc  rec-dom-rec
+        $twtfou_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([a-z])([a-z])([A-Z])([A-Z])/){ #25 rryyCC  rec-rec-dom
+        $twtfiv_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([a-z])([a-z])([A-Z])([a-z])/){ #26 rryyCc  rec-rec-dom
+        $twtsix_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([a-z])([a-z])([a-z])([a-z])/){ #27 rryycc  rec-rec-dom
+        $twtsev_holder = $arr[$i];
+      }
+    }
+
+    #Regular expressions to count phenotypic ratios
+    my $dom_dom_dom = grep(//, @arr); #i.e: XXXX or XxXx or XXXx or XxXX
+    my $per_one = ($dom_dom/16)*100;                             #to get the percentage
+
+    my $dom_dom_rec = grep(//, @arr);                #i.e: XXxx or Xxxx
+    my $per_two = ($dom_rec/16)*100;
+
+    my $dom_rec_dom = grep(//, @arr);                #i.e: XXxx or Xxxx
+    my $per_two = ($dom_rec/16)*100;
+
+    my $dom_rec_rec = grep(//, @arr);                #i.e: XXxx or Xxxx
+    my $per_two = ($dom_rec/16)*100;
+
+    my $rec_dom_dom = grep(//, @arr);                #i.e: xxXx or xxXX
+    my $per_three = ($rec_dom/16)*100;
+
+    my $rec_dom_rec = grep(//, @arr);                #i.e: xxXx or xxXX
+    my $per_three = ($rec_dom/16)*100;
+
+    my $rec_rec_dom = grep(//, @arr);                #i.e: xxXx or xxXX
+    my $per_three = ($rec_dom/16)*100;
+
+    my $rec_rec_rec = grep(/([a-z])([a-z])([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: xxxxxx
+    my $per_four = ($rec_rec/16)*100;
+
+
     print color("GREEN");
     print "The punett square for this trihybrid cross: \n";
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
