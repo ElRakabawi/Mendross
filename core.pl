@@ -112,6 +112,23 @@ if($genes == 1){
       }
     }
 
+    my $arr_len = scalar(@arr);
+    my $dom_holder;
+    my $het_holder;
+    my $rec_holder;
+
+    for(my $i=0; $i<$arr_len; $i++){
+      if($arr[$i] =~ m/([A-Z])([A-Z])/){
+        $dom_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])/){
+        $het_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])/){
+        $rec_holder = $arr[$i];
+      }
+    }
+
     #Regular expressions to count genotypic ratios
     my $dom = grep(/([A-Z])([A-Z])/, @arr); #i.e: AA
     $dom = ($dom/4)*100;                    #to get the percentage
@@ -122,26 +139,51 @@ if($genes == 1){
 
     #Regular expressions to count phenotypic ratios
     my $trait_one = grep(/([A-Z])([A-Z])|([A-Z])([a-z])/, @arr); #i.e: AA or Aa
-    $trait_one = ($trait_one/4)*100;                                     #to get the percentage
-    my $trait_two = grep(/([a-z])([a-z])/, @arr);            #i.e: aa
+    $trait_one = ($trait_one/4)*100;                             #to get the percentage
+    my $trait_two = grep(/([a-z])([a-z])/, @arr);                #i.e: aa
     $trait_two = ($trait_two/4)*100;
 
 
-    print color("GREEN");
-    print "The punett square for this monohybrid cross: \n";
-    print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
-    print "\n";
-    print color("RESET");
-    print "\n";
-    print"Genotype percentage: \n";
-    print color("GREEN");
-    print "Dominant homozygous: $dom%\nHeterozygous: $het%\nRecessive homozygous: $rec%\n";
-    print color("RESET");
-    print"Phenotype percentage: \n";
-    print color("GREEN");
-    print "Trait one: $trait_one%\nTrait two: $trait_two%\n";
-    print color("RESET");
 
+    print"Do you want to see the phenotype ratios? (y,n): ";
+    my $choice = <STDIN>;
+    chomp $choice;
+    if($choice eq 'y'){
+      print"Trait one: ";
+      my $trait_one_name= <STDIN>;
+      print"Trait two: ";
+      my $trait_two_name= <STDIN>;
+
+      chomp $trait_one_name;
+      chomp $trait_two_name;
+
+      print color("GREEN");
+      print "The punett square for this monohybrid cross: \n";
+      print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
+      print "\n";
+      print color("RESET");
+      print "\n";
+      print"Genotype percentage: \n";
+      print color("GREEN");
+      print "$dom_holder: $dom%\n$het_holder: $het%\n$rec_holder: $rec%\n";
+      print color("RESET");
+      print"Phenotype percentage: \n";
+      print color("GREEN");
+      print "$trait_one_name: $trait_one%\n$trait_two_name: $trait_two%\n";
+      print color("RESET");
+    }
+    elsif ($choice eq 'n'){
+      print color("GREEN");
+      print "The punett square for this monohybrid cross: \n";
+      print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
+      print "\n";
+      print color("RESET");
+      print "\n";
+      print"Genotype percentage: \n";
+      print color("GREEN");
+      print "$dom_holder: $dom%\n$het_holder: $het%\n$rec_holder: $rec%\n";
+      print color("RESET");
+    }
 
 
 }
