@@ -131,11 +131,8 @@ if($genes == 1){
 
     #Regular expressions to count genotypic ratios
     my $dom = grep(/([A-Z])([A-Z])/, @arr); #i.e: AA
-    $dom = ($dom/4)*100;                    #to get the percentage
     my $het = grep(/([A-Z])([a-z])/, @arr); #i.e: Aa
-    $het = ($het/4)*100;
     my $rec = grep(/([a-z])([a-z])/, @arr); #i.e: aa
-    $rec = ($rec/4)*100;
 
     #Regular expressions to count phenotypic ratios
     my $trait_one = grep(/([A-Z])([A-Z])|([A-Z])([a-z])/, @arr); #i.e: AA or Aa
@@ -163,9 +160,9 @@ if($genes == 1){
       print "\n";
       print color("RESET");
       print "\n";
-      print"Genotype percentage: \n";
+      print"Genotype: \n";
       print color("GREEN");
-      print "$dom_holder: $dom%\n$het_holder: $het%\n$rec_holder: $rec%\n";
+      print "$dom_holder: $dom\n$het_holder: $het\n$rec_holder: $rec\n";
       print color("RESET");
       print"Phenotype percentage: \n";
       print color("GREEN");
@@ -179,9 +176,9 @@ if($genes == 1){
       print "\n";
       print color("RESET");
       print "\n";
-      print"Genotype percentage: \n";
+      print"Genotype: \n";
       print color("GREEN");
-      print "$dom_holder: $dom%\n$het_holder: $het%\n$rec_holder: $rec%\n";
+      print "$dom_holder: $dom\n$het_holder: $het\n$rec_holder: $rec\n";
       print color("RESET");
     }
 
@@ -237,10 +234,108 @@ elsif($genes == 2) {
       }
     }
 
+    #Derefrencing the multidimensional array into a one-dimensional array
+    my @arr = ();
+    for my $val (@$rows) {
+      for ( 1 .. $#$val ) {
+        push @arr, $val->[$_];
+      }
+    }
+
+    my $arr_len = scalar(@arr);
+    my $one_holder;
+    my $two_holder;
+    my $thr_holder;
+    my $fou_holder;
+    my $fiv_holder;
+    my $six_holder;
+    my $sev_holder;
+    my $eig_holder;
+    my $nin_holder;
+
+
+    for(my $i=0; $i<$arr_len; $i++){
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([A-Z])/){  #XXXX
+        $one_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([a-z])/){  #XxXx
+        $two_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([A-Z])([a-z])/){  #XXXx
+        $thr_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([A-Z])([A-Z])/){  #XxXX
+        $fou_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([A-Z])([a-z])([a-z])/){  #XXxx
+        $fiv_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([A-Z])([a-z])([a-z])([a-z])/){  #Xxxx
+        $six_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([a-z])/){  #xxXx
+        $sev_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([A-Z])([A-Z])/){  #xxXX
+        $eig_holder = $arr[$i];
+      }
+      if($arr[$i] =~ m/([a-z])([a-z])([a-z])([a-z])/){ #xxxx
+        $nin_holder = $arr[$i];
+      }
+    }
+
+    #Regular expressions to count genotypic ratios
+
+    #Dom-Dom
+    my $gone = grep(/([A-Z])([A-Z])([A-Z])([A-Z])/, @arr); #i.e: XXXX
+    my $gtwo = grep(/([A-Z])([a-z])([A-Z])([a-z])/, @arr); #i.e: XxXx
+    my $gthr = grep(/([A-Z])([A-Z])([A-Z])([a-z])/, @arr); #i.e: XXXx
+    my $gfou = grep(/([A-Z])([a-z])([A-Z])([A-Z])/, @arr); #i.e: XxXX
+    #Dom-Rec
+    my $gfiv = grep(/([A-Z])([A-Z])([a-z])([a-z])/, @arr); #i.e: XXxx
+    my $gsix = grep(/([A-Z])([a-z])([a-z])([a-z])/, @arr); #i.e: Xxxx
+    #Rec-Dom
+    my $gsev = grep(/([a-z])([a-z])([A-Z])([a-z])/, @arr); #i.e: xxXx
+    my $gnin = grep(/([a-z])([a-z])([A-Z])([A-Z])/, @arr); #i.e: xxXX
+    #Rec-Rec
+    my $geig = grep(/([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: xxxx
+
+    #Regular expressions to count phenotypic ratios
+    my $dom_dom = grep(/([A-Z])([A-Z])([A-Z])([A-Z])|([A-Z])([a-z])([A-Z])([a-z])|([A-Z])([A-Z])([A-Z])([a-z])|([A-Z])([a-z])([A-Z])([A-Z])/, @arr); #i.e: XXXX or XxXx or XXXx or XxXX
+    my $per_one = ($dom_dom/16)*100;                             #to get the percentage
+
+    my $dom_rec = grep(/([A-Z])([A-Z])([a-z])([a-z])|([A-Z])([a-z])([a-z])([a-z])/, @arr);                #i.e: XXxx or Xxxx
+    my $per_two = ($dom_rec/16)*100;
+
+    my $rec_dom = grep(/([a-z])([a-z])([A-Z])([a-z])|([a-z])([a-z])([A-Z])([A-Z])/, @arr);                #i.e: xxXx or xxXX
+    my $per_three = ($rec_dom/16)*100;
+    
+    my $rec_rec = grep(/([a-z])([a-z])([a-z])([a-z])/, @arr);                #i.e: xxxx
+    my $per_four = ($rec_rec/16)*100;
+
+
     print color("GREEN");
-    print "The punett square for this dihybrid cross: \n";
+    print "The punett square for this monohybrid cross: \n";
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
     print "\n";
+    print color("RESET");
+    print "\n";
+    print"Genotype: \n";
+    print color("GREEN");
+    print "
+$one_holder: $gone
+$two_holder: $gtwo
+$thr_holder: $gthr
+$fou_holder: $gfou
+$fiv_holder: $gfiv
+$six_holder: $gsix
+$sev_holder: $gsev
+$eig_holder: $geig
+$nin_holder: $geig\n";
+    print color("RESET");
+    print"Phenotype percentage: \n";
+    print color("GREEN");
+    print "dom-dom: $dom_dom($per_one%)\ndom-rec: $dom_rec($per_two%)\nrec-dom: $rec_dom($per_three%)\nrec_rec: $rec_rec($per_four%)\n";
     print color("RESET");
 }
 
