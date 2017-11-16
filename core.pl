@@ -282,9 +282,9 @@ elsif($genes == 2) {
     my $gsix = grep(/([A-Z])([a-z])([a-z])([a-z])/, @arr); #i.e: Xxxx
     #Rec-Dom
     my $gsev = grep(/([a-z])([a-z])([A-Z])([a-z])/, @arr); #i.e: xxXx
-    my $gnin = grep(/([a-z])([a-z])([A-Z])([A-Z])/, @arr); #i.e: xxXX
+    my $geig = grep(/([a-z])([a-z])([A-Z])([A-Z])/, @arr); #i.e: xxXX
     #Rec-Rec
-    my $geig = grep(/([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: xxxx
+    my $gnin = grep(/([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: xxxx
 
     #Percentages of genotypes
     my $per_gone = ($gone/16)*100;
@@ -318,15 +318,34 @@ elsif($genes == 2) {
     print color("RESET");
     print "\n";
     print "Genotype: \n";
-    print color("GREEN"), "$one_holder: $gone($per_gone)%
-$two_holder: $gtwo($per_gtwo)%
-$thr_holder: $gthr($per_gthr)%
-$fou_holder: $gfou($per_gfou)%
-$fiv_holder: $gfiv($per_gfiv)%
-$six_holder: $gsix($per_gsix)%
-$sev_holder: $gsev($per_gsev)%
-$eig_holder: $geig($per_geig)%
-$nin_holder: $geig($per_gnin)%\n";
+    print color("GREEN");
+    if($gone != 0){
+      print "$one_holder: $gone($per_gone)%\n";
+    }
+    if($gtwo != 0){
+      print "$two_holder: $gtwo($per_gtwo)%\n";
+    }
+    if($gthr != 0){
+      print "$thr_holder: $gthr($per_gthr)%\n";
+    }
+    if($gfou != 0){
+      print "$fou_holder: $gfou($per_gfou)%\n";
+    }
+    if($gfiv != 0){
+      print "$fiv_holder: $gfiv($per_gfiv)%\n";
+    }
+    if($gsix != 0){
+      print "$six_holder: $gsix($per_gsix)%\n";
+    }
+    if($gsev != 0){
+      print "$sev_holder: $gsev($per_gsev)%\n";
+    }
+    if($geig != 0){
+      print "$eig_holder: $geig($per_geig)%\n";
+    }
+    if($gnin != 0){
+      print "$nin_holder: $gnin($per_gnin)%\n";
+    }
     print color("RESET");
     print"Phenotype:\n";
     print color("GREEN");
