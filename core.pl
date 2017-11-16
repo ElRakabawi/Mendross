@@ -154,7 +154,15 @@ if($genes == 1){
       print "\n";
       print"Genotype: \n";
       print color("GREEN");
-      print "$dom_holder: $dom($per_dom)%\n$het_holder: $het($per_het)%\n$rec_holder: $rec($per_rec)%\n";
+      if($dom != 0){
+        print "$dom_holder: $dom($per_dom)%\n";
+      }
+      if($het != 0){
+        print "$het_holder: $het($per_het)%\n";
+      }
+      if($rec != 0){
+        print "$rec_holder: $rec($per_rec)%\n";
+      }
       print color("RESET");
       print"Phenotype: \n";
       print color("GREEN");
@@ -304,7 +312,7 @@ elsif($genes == 2) {
 
 
     print color("GREEN");
-    print "The punett square for this monohybrid cross: \n";
+    print "The punett square for this dihybrid cross: \n";
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
     print "\n";
     print color("RESET");
@@ -586,29 +594,29 @@ elsif($genes == 3) {
     }
 
     #Regular expressions to count phenotypic ratios
-    my $dom_dom_dom = grep(//, @arr); #i.e: XXXX or XxXx or XXXx or XxXX
-    my $per_one = ($dom_dom/16)*100;                             #to get the percentage
+    my $dom_dom_dom = grep(/([A-Z])([A-Z])([A-Z])([A-Z])([A-Z])([A-Z])|([A-Z])([A-Z])([A-Z])([A-Z])([A-Z])([a-z])|([A-Z])([A-Z])([A-Z])([a-z])([A-Z])([A-Z])|([A-Z])([A-Z])([A-Z])([a-z])([A-Z])([a-z])|([A-Z])([a-z])([A-Z])([A-Z])([A-Z])([A-Z])|([A-Z])([a-z])([A-Z])([A-Z])([A-Z])([a-z])|([A-Z])([a-z])([A-Z])([a-z])([A-Z])([A-Z])|([A-Z])([a-z])([A-Z])([a-z])([A-Z])([a-z])/, @arr); #i.e: 1 or 2 or 4 or 5 or 10 or 11 or 13 or 14
+    my $per_one = ($dom_dom_dom/64)*100;  #to get the percentage
 
-    my $dom_dom_rec = grep(//, @arr);                #i.e: XXxx or Xxxx
-    my $per_two = ($dom_rec/16)*100;
+    my $dom_dom_rec = grep(/([A-Z])([A-Z])([A-Z])([A-Z])([a-z])([a-z])|([A-Z])([A-Z])([A-Z])([a-z])([a-z])([a-z])|([A-Z])([a-z])([A-Z])([A-Z])([a-z])([a-z])|([A-Z])([a-z])([A-Z])([a-z])([a-z])([a-z])/, @arr); #i.e: 3 or 6 or 12 or 15
+    my $per_two = ($dom_dom_rec/64)*100;
 
-    my $dom_rec_dom = grep(//, @arr);                #i.e: XXxx or Xxxx
-    my $per_two = ($dom_rec/16)*100;
+    my $dom_rec_dom = grep(/([A-Z])([A-Z])([a-z])([a-z])([A-Z])([A-Z])|([A-Z])([A-Z])([a-z])([a-z])([A-Z])([a-z])|([A-Z])([a-z])([a-z])([a-z])([A-Z])([A-Z])|([A-Z])([a-z])([a-z])([a-z])([A-Z])([a-z])/, @arr); #i.e: 7 or 8 or 16 or 17
+    my $per_three = ($dom_rec_dom/64)*100;
 
-    my $dom_rec_rec = grep(//, @arr);                #i.e: XXxx or Xxxx
-    my $per_two = ($dom_rec/16)*100;
+    my $dom_rec_rec = grep(/([A-Z])([A-Z])([a-z])([a-z])([a-z])([a-z])|([A-Z])([a-z])([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: 9 or 18
+    my $per_four = ($dom_rec_rec/64)*100;
 
-    my $rec_dom_dom = grep(//, @arr);                #i.e: xxXx or xxXX
-    my $per_three = ($rec_dom/16)*100;
+    my $rec_dom_dom = grep(/([a-z])([a-z])([A-Z])([A-Z])([A-Z])([A-Z])|([a-z])([a-z])([A-Z])([A-Z])([A-Z])([a-z])|([a-z])([a-z])([A-Z])([a-z])([A-Z])([A-Z])|([a-z])([a-z])([A-Z])([a-z])([A-Z])([a-z])/, @arr); #i.e: 19 or 20 or 22 or 23
+    my $per_five = ($rec_dom_dom/64)*100;
 
-    my $rec_dom_rec = grep(//, @arr);                #i.e: xxXx or xxXX
-    my $per_three = ($rec_dom/16)*100;
+    my $rec_dom_rec = grep(/([a-z])([a-z])([A-Z])([A-Z])([a-z])([a-z])|([a-z])([a-z])([A-Z])([a-z])([a-z])([a-z])/, @arr); #i.e: 21 or 24
+    my $per_six = ($rec_dom_rec/64)*100;
 
-    my $rec_rec_dom = grep(//, @arr);                #i.e: xxXx or xxXX
-    my $per_three = ($rec_dom/16)*100;
+    my $rec_rec_dom = grep(/([a-z])([a-z])([a-z])([a-z])([A-Z])([A-Z])|([a-z])([a-z])([a-z])([a-z])([A-Z])([a-z])/, @arr); #i.e: 25 or 26
+    my $per_seven = ($rec_rec_dom/64)*100;
 
-    my $rec_rec_rec = grep(/([a-z])([a-z])([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: xxxxxx
-    my $per_four = ($rec_rec/16)*100;
+    my $rec_rec_rec = grep(/([a-z])([a-z])([a-z])([a-z])([a-z])([a-z])/, @arr); #i.e: 27
+    my $per_eight = ($rec_rec_rec/64)*100;
 
 
     print color("GREEN");
@@ -616,4 +624,17 @@ elsif($genes == 3) {
     print generate_table(rows => $rows, header_row => 1, separate_rows => 1);
     print "\n";
     print color("RESET");
+    print color("RESET");
+    print"Phenotype:\n";
+    print color("GREEN");
+    print "dom-dom-dom: $dom_dom_dom($per_one%)
+dom-dom-rec: $dom_dom_rec($per_two%)
+dom-rec-dom: $dom_rec_dom($per_three%)
+dom-rec-rec: $dom_rec_rec($per_four%)
+rec-dom-dom: $rec_dom_dom($per_five%)
+rec-dom-rec: $rec_dom_rec($per_six%)
+rec-rec-dom: $rec_rec_dom($per_seven%)
+rec-rec-rec: $rec_rec_rec($per_eight%)\n";
+    print color("RESET");
+
 }
