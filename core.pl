@@ -170,6 +170,29 @@ if($genes == 1){
       print color("RESET");
 
 
+      #Chi-square analysis
+      print "Enter dominant trait observed number:";
+      my $obs_one = <STDIN>;
+      chomp $obs_one;
+
+      print "Enter dominant trait observed number:";
+      my $obs_two = <STDIN>;
+      chomp $obs_two;
+
+      my $total = $obs_one + $obs_two;
+
+      my $obs_ratio_one = $obs_one/$total;
+      my $obs_ratio_two = $obs_two/$total;
+      my $exp_ratio_one = ($per_trait_one/100)/$total;
+      my $exp_ratio_two = ($per_trait_two/100)/$total;
+
+      my $DOF = 1;
+
+      my $chi_value = (($obs_ratio_one-$exp_ratio_one)/$exp_ratio_one)+(($obs_ratio_two-$exp_ratio_two)/$exp_ratio_two);
+
+      print"$chi_value\n";
+
+
 }
 
 #Computation of dihybrid crossing
@@ -647,13 +670,13 @@ elsif($genes == 3) {
     print"Phenotype:\n";
     print color("GREEN");
     print "dom-dom-dom: $dom_dom_dom($per_one%)
-dom-dom-rec: $dom_dom_rec($per_two%)
-dom-rec-dom: $dom_rec_dom($per_three%)
-dom-rec-rec: $dom_rec_rec($per_four%)
-rec-dom-dom: $rec_dom_dom($per_five%)
-rec-dom-rec: $rec_dom_rec($per_six%)
-rec-rec-dom: $rec_rec_dom($per_seven%)
-rec-rec-rec: $rec_rec_rec($per_eight%)\n";
+    dom-dom-rec: $dom_dom_rec($per_two%)
+    dom-rec-dom: $dom_rec_dom($per_three%)
+    dom-rec-rec: $dom_rec_rec($per_four%)
+    rec-dom-dom: $rec_dom_dom($per_five%)
+    rec-dom-rec: $rec_dom_rec($per_six%)
+    rec-rec-dom: $rec_rec_dom($per_seven%)
+    rec-rec-rec: $rec_rec_rec($per_eight%)\n";
     print color("RESET");
 
 }
