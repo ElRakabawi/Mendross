@@ -185,19 +185,23 @@ if($genes == 1){
       my $exp_one = ($trait_one/4) * $total; #Expected number of dominant trait
       my $exp_two = ($trait_two/4) * $total; #Expected number of recessive trait
 
-      my $DOF = 1;
+      my $DOF = 1; #Degree of freedom = (n-1) = (2-1) = 1
 
       my $chi_value = ((($obs_one - $exp_one)**2) / $exp_one)+((($obs_two - $exp_two)**2) / $exp_two);
       my $critical_value = 3.841;
 
+      print "\nChi-square value: $chi_value\n";
+
       if($chi_value < $critical_value){
+        print color("GREEN");
         print "ACCEPTED\n";
+        print color("RESET");
       }
       else {
+        print color("RED");
         print "NOT ACCEPTED\n";
+        print color("RESET");
       }
-
-
 }
 
 #Computation of dihybrid crossing
@@ -380,7 +384,49 @@ elsif($genes == 2) {
     print "dom-dom: $dom_dom($per_one%)\ndom-rec: $dom_rec($per_two%)\nrec-dom: $rec_dom($per_three%)\nrec_rec: $rec_rec($per_four%)\n";
     print color("RESET");
 
-    
+    #Chi-square analysis
+    print "Enter dom-dom trait observed number: ";
+    my $obs_one = <STDIN>; #Observed number of dominant trait
+    chomp $obs_one;
+
+    print "Enter dom-rec trait observed number: ";
+    my $obs_two = <STDIN>; #Observed number of recessive trait
+    chomp $obs_two;
+
+    print "Enter rec-dom trait observed number: ";
+    my $obs_three = <STDIN>; #Observed number of dominant trait
+    chomp $obs_three;
+
+
+    print "Enter rec-rec trait observed number: ";
+    my $obs_four = <STDIN>; #Observed number of dominant trait
+    chomp $obs_three;
+
+
+    my $total = $obs_one + $obs_two + $obs_three + $obs_four;
+
+    my $exp_one = ($dom_dom/16) * $total; #Expected number of dom-dom trait
+    my $exp_two = ($dom_rec/16) * $total; #Expected number of dom-rec trait
+    my $exp_three = ($rec_dom/16) * $total; #Expected number of rec-dom trait
+    my $exp_four = ($rec_rec/16) * $total; #Expected number of rec-rec trait
+
+    my $DOF = 3; #Degree of freedom = (n-1) = (4-1) = 3
+
+    my $chi_value = ((($obs_one - $exp_one)**2) / $exp_one) + ((($obs_two - $exp_two)**2) / $exp_two) + ((($obs_three - $exp_three)**2) / $exp_three) + ((($obs_four - $exp_four)**2) / $exp_four);
+    my $critical_value = 7.815;
+
+    print "\nChi-square value: $chi_value\n";
+
+    if($chi_value < $critical_value){
+      print color("GREEN");
+      print "ACCEPTED\n";
+      print color("RESET");
+    }
+    else {
+      print color("RED");
+      print "NOT ACCEPTED\n";
+      print color("RESET");
+    }
 }
 
 elsif($genes == 3) {
