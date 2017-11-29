@@ -80,6 +80,7 @@ my @POS = (); #Parent one step
 my @PTS = (); #Parent two step
 
 
+
 #Computation of monohybrid crossing
 if($genes == 1){
   for(my $i=0; $i<$alleles; $i++){
@@ -172,25 +173,29 @@ if($genes == 1){
 
       #Chi-square analysis
       print "Enter dominant trait observed number:";
-      my $obs_one = <STDIN>;
+      my $obs_one = <STDIN>; #Observed number of dominant trait
       chomp $obs_one;
 
       print "Enter dominant trait observed number:";
-      my $obs_two = <STDIN>;
+      my $obs_two = <STDIN>; #Observed number of recessive trait
       chomp $obs_two;
 
       my $total = $obs_one + $obs_two;
 
-      my $obs_ratio_one = $obs_one/$total;
-      my $obs_ratio_two = $obs_two/$total;
-      my $exp_ratio_one = ($per_trait_one/100)/$total;
-      my $exp_ratio_two = ($per_trait_two/100)/$total;
+      my $exp_one = ($trait_one/4) * $total; #Expected number of dominant trait
+      my $exp_two = ($trait_two/4) * $total; #Expected number of recessive trait
 
       my $DOF = 1;
 
-      my $chi_value = (($obs_ratio_one-$exp_ratio_one)/$exp_ratio_one)+(($obs_ratio_two-$exp_ratio_two)/$exp_ratio_two);
+      my $chi_value = ((($obs_one - $exp_one)**2) / $exp_one)+((($obs_two - $exp_two)**2) / $exp_two);
+      my $critical_value = 3.841;
 
-      print"$chi_value\n";
+      if($chi_value < $critical_value){
+        print "ACCEPTED\n";
+      }
+      else {
+        print "NOT ACCEPTED\n";
+      }
 
 
 }
@@ -374,6 +379,8 @@ elsif($genes == 2) {
     print color("GREEN");
     print "dom-dom: $dom_dom($per_one%)\ndom-rec: $dom_rec($per_two%)\nrec-dom: $rec_dom($per_three%)\nrec_rec: $rec_rec($per_four%)\n";
     print color("RESET");
+
+    
 }
 
 elsif($genes == 3) {
