@@ -722,7 +722,8 @@ elsif($genes == 3) {
     print color("RESET");
     print"Phenotype:\n";
     print color("GREEN");
-    print "dom-dom-dom: $dom_dom_dom($per_one%)
+    print "
+    dom-dom-dom: $dom_dom_dom($per_one%)
     dom-dom-rec: $dom_dom_rec($per_two%)
     dom-rec-dom: $dom_rec_dom($per_three%)
     dom-rec-rec: $dom_rec_rec($per_four%)
@@ -734,50 +735,50 @@ elsif($genes == 3) {
 
     #Chi-square analysis
     print "Enter dom-dom trait observed number: ";
-    my $obs_one = <STDIN>; #Observed number of dominant trait
+    my $obs_one = <STDIN>; #Observed number of dom-dom-dom trait
     chomp $obs_one;
 
     print "Enter dom-rec trait observed number: ";
-    my $obs_two = <STDIN>; #Observed number of recessive trait
+    my $obs_two = <STDIN>; #Observed number of dom-dom-rec trait
     chomp $obs_two;
 
     print "Enter rec-dom trait observed number: ";
-    my $obs_three = <STDIN>; #Observed number of dominant trait
+    my $obs_three = <STDIN>; #Observed number of dom-rec-dom trait
     chomp $obs_three;
 
 
     print "Enter rec-rec trait observed number: ";
-    my $obs_four = <STDIN>; #Observed number of dominant trait
+    my $obs_four = <STDIN>; #Observed number of dom-rec-rec trait
     chomp $obs_four;
 
     print "Enter dom-dom trait observed number: ";
-    my $obs_five = <STDIN>; #Observed number of dominant trait
+    my $obs_five = <STDIN>; #Observed number of rec-dom-dom trait
     chomp $obs_five;
 
     print "Enter dom-rec trait observed number: ";
-    my $obs_six = <STDIN>; #Observed number of recessive trait
+    my $obs_six = <STDIN>; #Observed number of rec-dom-rec trait
     chomp $obs_six;
 
     print "Enter rec-dom trait observed number: ";
-    my $obs_seven = <STDIN>; #Observed number of dominant trait
+    my $obs_seven = <STDIN>; #Observed number of rec-rec-dom trait
     chomp $obs_seven;
 
 
     print "Enter rec-rec trait observed number: ";
-    my $obs_eight = <STDIN>; #Observed number of dominant trait
+    my $obs_eight = <STDIN>; #Observed number of rec-rec-rec trait
     chomp $obs_eight;
 
 
     my $total = $obs_one + $obs_two + $obs_three + $obs_four + $obs_five + $obs_six + $obs_seven + $obs_eight;
 
-    my $exp_one = ($dom_dom_dom/16) * $total; #Expected number of dom-dom-doc trait
-    my $exp_two = ($dom_dom_rec/16) * $total; #Expected number of dom-dom-rec trait
-    my $exp_three = ($dom_rec_dom/16) * $total; #Expected number of dom-rec-dom trait
-    my $exp_four = ($dom_rec_rec/16) * $total; #Expected number of dom-rec-rec trait
-    my $exp_five = ($rec_dom_dom/16) * $total; #Expected number of rec-dom-dom trait
-    my $exp_six = ($rec_dom_rec/16) * $total; #Expected number of rec-dom-rec trait
-    my $exp_seven = ($rec_rec_dom/16) * $total; #Expected number of rec-rec-dom trait
-    my $exp_eight = ($rec_rec_rec/16) * $total; #Expected number of rec-rec-rec trait
+    my $exp_one = ($dom_dom_dom/64) * $total; #Expected number of dom-dom-doc trait
+    my $exp_two = ($dom_dom_rec/64) * $total; #Expected number of dom-dom-rec trait
+    my $exp_three = ($dom_rec_dom/64) * $total; #Expected number of dom-rec-dom trait
+    my $exp_four = ($dom_rec_rec/64) * $total; #Expected number of dom-rec-rec trait
+    my $exp_five = ($rec_dom_dom/64) * $total; #Expected number of rec-dom-dom trait
+    my $exp_six = ($rec_dom_rec/64) * $total; #Expected number of rec-dom-rec trait
+    my $exp_seven = ($rec_rec_dom/64) * $total; #Expected number of rec-rec-dom trait
+    my $exp_eight = ($rec_rec_rec/64) * $total; #Expected number of rec-rec-rec trait
 
     my $DOF = 7; #Degree of freedom = (n-1) = (8-1) = 7
 
